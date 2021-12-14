@@ -79,7 +79,7 @@ public class HttpServerConnection implements Runnable{
                 out.writeString("Content-Type: image/png\r\n");
                 out.writeString("");
                 byte[] fileContent = Files.readAllBytes(file.toPath());
-                out.writeBytes(fileContent);
+                out.writeBytes(fileContent,0,fileContent.length);
                 out.close();
                 socket.close();
             }

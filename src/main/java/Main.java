@@ -49,6 +49,7 @@ public class Main {
 //  ----------------------------------------------------------------------------------------    OPEN SERVER & PORT
         ServerSocket serverSocket = new ServerSocket(port);
         ExecutorService pool = Executors.newFixedThreadPool(3);
+
         while (true) {
             System.out.println("[SERVER] Waiting for client connection...");
             Socket socket = serverSocket.accept();
