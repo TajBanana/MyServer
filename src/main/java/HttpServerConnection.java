@@ -21,13 +21,7 @@ public class HttpServerConnection implements Runnable{
     @Override
     public void run() {
         // TODO send output and close
-        try {
-            httpServer.checkPath(docRoot); //check for directory
-            httpServer.openPort(port);
-//            HttpWriter httpWriter = new HttpWriter(socket.getOutputStream());
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        //            HttpWriter httpWriter = new HttpWriter(socket.getOutputStream());
+        System.out.println("this is a thread");
     }
 }

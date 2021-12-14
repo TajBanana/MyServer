@@ -50,10 +50,15 @@ public class Main {
         System.out.println(port);
 
 //  ----------------------------------------------------------------------------------------    OPEN SERVER & PORT
-        while (true) {
-            HttpServer httpServer = new HttpServer();
+        ServerSocket serverSocket = new ServerSocket(port);
 
-            HttpServerConnection httpServerConnection = new HttpServerConnection(port,httpServer.getSocket(),httpServer,docRoot);
+        while (true) {
+            System.out.println("[SERVER] Waiting for client connection...");
+            Socket socket = serverSocket.accept();
+
+            HttpServer httpServer = new HttpServer();
+            httpServer.checkPath(docRoot); //check for directory
+            HttpServerConnection httpServerConnection = new HttpServerConnection(port,socket,httpServer,docRoot);
             pool.execute(httpServerConnection);
         }
     }

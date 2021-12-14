@@ -9,25 +9,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class HttpServer {
+    private ServerSocket serverSocket;
     private Socket socket;
     private int port;
 
     public Socket getSocket() {
         return socket;
-    }
-
-    public HttpServer() throws IOException {
-    }
-
-    public boolean checkDir() {
-        return false;
-    }
-
-    public void openPort(int port) throws IOException {
-        ServerSocket httpServer = new ServerSocket(port);
-        System.out.println("[SERVER] Waiting for client connection...");
-        this.socket = httpServer.accept();
-        System.out.println("[SERVER] Connection established");
     }
 
     public void checkPath(String docRoot) {
