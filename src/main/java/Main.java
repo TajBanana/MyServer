@@ -10,8 +10,7 @@ import java.util.concurrent.Executors;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-//        if --port arg[0], --docroot rag[1]
-        ExecutorService pool = Executors.newFixedThreadPool(3);
+//        ExecutorService pool = Executors.newFixedThreadPool(3);
 
 
         int port = 3000;
@@ -45,7 +44,6 @@ public class Main {
             docRoot = docRootInput.substring(docRootInput.indexOf(":")+1);
         }
 
-
         System.out.println(docRoot);
         System.out.println(port);
 
@@ -55,11 +53,13 @@ public class Main {
         while (true) {
             System.out.println("[SERVER] Waiting for client connection...");
             Socket socket = serverSocket.accept();
+            System.out.println("[SERVER] Connection established.");
 
             HttpServer httpServer = new HttpServer();
             httpServer.checkPath(docRoot); //check for directory
-            HttpServerConnection httpServerConnection = new HttpServerConnection(port,socket,httpServer,docRoot);
-            pool.execute(httpServerConnection);
+            HttpServerConnection httpServerConnection = new HttpServerConnection(port,socket);
+//            pool.execute(httpServerConnection);
+            httpServerConnection.run();
         }
     }
 }
