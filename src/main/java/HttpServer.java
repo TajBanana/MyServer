@@ -19,5 +19,8 @@ public class HttpServer {
         System.out.println("[SERVER] Connection established");
     }
 
+    public void checkPath(String docRoot) {
+
+    }
 
 }

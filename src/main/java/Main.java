@@ -10,7 +10,7 @@ public class Main {
 //        if --port arg[0], --docroot rag[1]
 
         int port = 3000;
-        String docRoot = "/static";
+        String docRoot = "static";
         List<String> argsArray = new ArrayList<>();
 
 
