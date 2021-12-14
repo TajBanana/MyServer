@@ -1,13 +1,18 @@
+import javax.lang.model.type.ArrayType;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Main {
     public static void main(String[] args) throws IOException {
 //        if --port arg[0], --docroot rag[1]
+        ExecutorService pool = Executors.newFixedThreadPool(3);
+
 
         int port = 3000;
         String docRoot = "static";
@@ -45,11 +50,11 @@ public class Main {
         System.out.println(port);
 
 //  ----------------------------------------------------------------------------------------    OPEN SERVER & PORT
-        HttpServer httpServer = new HttpServer();
-        httpServer.checkPath(docRoot); //check for directory
-        httpServer.openPort(port);
+        while (true) {
+            HttpServer httpServer = new HttpServer();
 
-
-
+            HttpServerConnection httpServerConnection = new HttpServerConnection(port,httpServer.getSocket(),httpServer,docRoot);
+            pool.execute(httpServerConnection);
+        }
     }
 }
