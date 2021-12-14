@@ -63,7 +63,7 @@ public class HttpServerConnection implements Runnable{
 
 //  ----------------------------------------------------------------------------------------    ACTION 3
             if(file.exists()) {
-                out.writeString("HTTP/1.1 200 ok\r\n");
+                out.writeString("HTTP/1.1 200 OK\r\n");
                 out.writeString("");
                 byte[] fileContent = Files.readAllBytes(file.toPath());
                 out.writeBytes(fileContent);

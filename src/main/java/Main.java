@@ -10,7 +10,6 @@ import java.util.concurrent.Executors;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        ExecutorService pool = Executors.newFixedThreadPool(3);
 
 
         int port = 3000;
@@ -49,7 +48,7 @@ public class Main {
 
 //  ----------------------------------------------------------------------------------------    OPEN SERVER & PORT
         ServerSocket serverSocket = new ServerSocket(port);
-
+        ExecutorService pool = Executors.newFixedThreadPool(3);
         while (true) {
             System.out.println("[SERVER] Waiting for client connection...");
             Socket socket = serverSocket.accept();
