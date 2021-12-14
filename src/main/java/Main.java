@@ -46,14 +46,8 @@ public class Main {
 
 //  ----------------------------------------------------------------------------------------    OPEN SERVER & PORT
         HttpServer httpServer = new HttpServer();
+        httpServer.checkPath(docRoot); //check for directory
         httpServer.openPort(port);
-
-
-
- /*       ServerSocket server = new ServerSocket(3000);
-        System.out.println("[SERVER] Waiting for client connection...");
-        Socket serverSocket = server.accept();
-        System.out.println("[SERVER] Connection established");*/
 
 
 
