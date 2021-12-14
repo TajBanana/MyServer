@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-//        ExecutorService pool = Executors.newFixedThreadPool(3);
+        ExecutorService pool = Executors.newFixedThreadPool(3);
 
 
         int port = 3000;
@@ -57,9 +57,9 @@ public class Main {
 
             HttpServer httpServer = new HttpServer();
             httpServer.checkPath(docRoot); //check for directory
-            HttpServerConnection httpServerConnection = new HttpServerConnection(port,socket);
-//            pool.execute(httpServerConnection);
-            httpServerConnection.run();  //using run to debug
+            HttpServerConnection httpServerConnection = new HttpServerConnection(port,socket,docRoot);
+            pool.execute(httpServerConnection);
+//            httpServerConnection.run();  //using run to debug
         }
     }
 }
