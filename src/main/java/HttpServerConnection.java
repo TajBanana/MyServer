@@ -1,6 +1,6 @@
 import java.io.*;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 public class HttpServerConnection implements Runnable{
     private Socket socket;
@@ -34,26 +34,37 @@ public class HttpServerConnection implements Runnable{
                 String[] method = line.split(" ", 1);
                 out.writeString(method + " not supported \r\n");
                 out.close();
+                socket.close();
+                return;
             }
 
 //            Action 2
             String[] lineStrArray = line.split(" ");
-            String index = lineStrArray[1];
+            String fileName = lineStrArray[1];
 
-            if (index.equals("/")) {
-                index = "index.html";
+            if (fileName.equals("/")) {
+                fileName = "index.html";
             }
-            File indexFile = new File("static/" + index);
-            if (!indexFile.exists()) {
+            File file = new File( docRoot + "/" + fileName);
+            if (!file.exists()) {
                 out.writeString("HTTP/1.1 404 Not Found\r\n");
                 out.writeString("\r\n");
-                out.writeString(index + " not found\r\n");
+                out.writeString(fileName + " not found\r\n");
+                out.close();
+                socket.close();
+                return;
             }
 
 //            Action 3
-
-
-
+            if(file.exists()) {
+                out.writeString("HTTP/1.1 200 ok/r/n");
+                out.writeString("\r\n");
+                byte[] fileContent = Files.readAllBytes(file.toPath());
+                out.writeBytes(fileContent);
+                out.close();
+                socket.close();
+                return;
+            }
 
 
 

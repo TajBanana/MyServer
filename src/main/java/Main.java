@@ -59,7 +59,7 @@ public class Main {
             httpServer.checkPath(docRoot); //check for directory
             HttpServerConnection httpServerConnection = new HttpServerConnection(port,socket);
 //            pool.execute(httpServerConnection);
-            httpServerConnection.run();
+            httpServerConnection.run();  //using run to debug
         }
     }
 }
