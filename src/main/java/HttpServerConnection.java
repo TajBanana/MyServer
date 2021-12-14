@@ -20,6 +20,8 @@ public class HttpServerConnection implements Runnable{
         HttpWriter out = null;
         String line = "";
 
+        System.out.println("starting thread");
+
 
         try {
             BufferedInputStream bis = new BufferedInputStream(socket.getInputStream());
@@ -36,7 +38,6 @@ public class HttpServerConnection implements Runnable{
                 out.writeString(method + " not supported \r\n");
                 out.close();
                 socket.close();
-                return;
             }
 
 //  ----------------------------------------------------------------------------------------    ACTION 2
@@ -58,7 +59,6 @@ public class HttpServerConnection implements Runnable{
                 out.writeString(fileName + " not found\r\n");
                 out.close();
                 socket.close();
-                return;
             }
 
 //  ----------------------------------------------------------------------------------------    ACTION 3
@@ -69,7 +69,6 @@ public class HttpServerConnection implements Runnable{
                 out.writeBytes(fileContent);
                 out.close();
                 socket.close();
-                return;
             }
 
 //  ----------------------------------------------------------------------------------------    ACTION 4
@@ -83,15 +82,10 @@ public class HttpServerConnection implements Runnable{
                 out.writeBytes(fileContent);
                 out.close();
                 socket.close();
-                return;
             }
 //
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        // TODO send output and close
-        // HttpWriter httpWriter = new HttpWriter(socket.getOutputStream());
-        System.out.println("this is a thread");
     }
 }
